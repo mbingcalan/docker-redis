@@ -1,11 +1,12 @@
 docker-redis
 ============
-Build
-    $ sudo docker build --tag=redis .
+#### Build (also, see build.sh)
 
-Redis on Docker.
-    $ sudo docker run -d -v /usr/local/var/db/redis:/usr/local/var/db/redis:rw -name redis redis
+    $ sudo docker build -t musashi/redis .
+
+#### Run
+
+    $ sudo docker run -d -v /var/lib/redis:/var/lib/redis:rw -name redis musashi/redis
     $ nc localhost 6379
     incr foo
     :1
-
