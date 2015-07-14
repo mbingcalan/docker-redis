@@ -1,12 +1,13 @@
-FROM ubuntu:12.04
-MAINTAINER Ben Firshman <ben@orchardup.com>
+FROM ubuntu:14.04
+MAINTAINER Michael Bingcalan <mbingcalan@agsx.net>
+
 RUN apt-get update -qq
-RUN apt-get install -y python-software-properties sudo
-ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get install -y \
+    software-properties-common \
+    python-software-properties
 RUN apt-add-repository -y ppa:chris-lea/redis-server
-RUN apt-get update -qq
+RUN apt-get update
 RUN apt-get install -y redis-server
-ADD run /usr/local/bin/run
-EXPOSE 6379
-VOLUME ["/var/lib/redis"]
-CMD ["/usr/local/bin/run"]
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD [ "redis-server" ]

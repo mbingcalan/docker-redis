@@ -1,12 +1,19 @@
 docker-redis
-============
-#### Build (also, see build.sh)
+================
 
-    $ sudo docker build -t musashi/redis .
+Create directory /etc/redis on host server and copy redis.conf to it.
 
-#### Run
+##### Build the container:
 
-    $ sudo docker run -d -v /var/lib/redis:/var/lib/redis:rw -name redis musashi/redis
-    $ nc localhost 6379
-    incr foo
-    :1
+`docker build -t musashi/docker-redis .`
+
+##### Run the container:
+
+`docker run -d -v /etc/redis:/etc/redis --name=redis docker-redis`
+
+##### Redis version
+
+```
+# redis-cli -v
+redis-cli 3.0.2
+```
